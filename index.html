@@ -1,1 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cursos Culminados de CCNAv7</title>
+  <link rel="icon" href="imagenes/favicon_red.ico" type="image/x-icon" />
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #1e3a8a, #60a5fa);
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #fff;
+    }
 
+    .container {
+      max-width: 1100px;
+      width: 100%;
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      text-align: center;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #e5e7eb;
+    }
+
+    .logo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      margin: 10px;
+      flex-shrink: 0;
+    }
+
+    .header-text {
+      flex: 1;
+      padding: 10px;
+    }
+
+    .header-text h1 {
+      margin: 0;
+      font-size: 28px;
+      color: #1e3a8a;
+    }
+
+    .header-text h2 {
+      margin: 8px 0;
+      font-size: 18px;
+      color: #1e3a8a;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #f8fafc;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 20px;
+      table-layout: fixed;
+    }
+
+    th, td {
+      padding: 20px;
+      font-size: 14px;
+      border-bottom: 1px solid #e0e0e0;
+      text-align: center;
+      vertical-align: top;
+      color: #333;
+    }
+
+    th {
+      background: #1e3a8a;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .curso-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+    }
+
+    .curso-titulo {
+      color: #1e3a8a;
+      font-weight: bold;
+      font-size: 15px;
+      margin-bottom: 10px;
+      min-height: 45px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .curso-titulo small {
+      color: #4b5563;
+      font-weight: normal;
+      margin-top: 4px;
+    }
+
+    .thumbnail-container {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .thumbnail-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .thumbnail-container img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(30, 58, 138, 0.9);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 5px;
+      font-size: 14px;
+      font-weight: bold;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .thumbnail-container:hover .play-button {
+      opacity: 1;
+    }
+
+    tr:hover {
+      background: #f1f5f9;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 12px;
+      color: #666;
+    }
+
+    footer a {
+      color: #1e3a8a;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Adaptación móvil (Vertical) */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .logo {
+        width: 90px;
+        height: 90px;
+      }
+
+      .header-text h1 {
+        font-size: 22px;
+      }
+
+      .header-text h2 {
+        font-size: 16px;
+      }
+
+      table, tbody, tr, th, td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      th {
+        display: none; /* Se ocultan los encabezados de tabla en móviles */
+      }
+
+      tr {
+        border-bottom: 2px solid #e5e7eb;
+      }
+
+      td {
+        border-bottom: none;
+        padding: 15px 10px;
+      }
+
+      /* Añade una etiqueta visual en móvil para saber qué módulo es cada curso */
+      td::before {
+        content: attr(data-modulo);
+        display: block;
+        background: #1e3a8a;
+        color: #fff;
+        font-size: 11px;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 4px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+      }
+
+      .curso-titulo {
+        min-height: auto;
+        margin-bottom: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <div class="header-content">
+      <img src="imagenes/logo-circular.jpg" alt="Logo Izquierdo" class="logo logo-left">
+      <div class="header-text">
+          <h1>Cursos Culminados</h1>
+        <h1>CCNAv7 [ITN - SRWE - ENSA]</h1>
+        <h1>Instructor Gustavo Spinetti</h1>
+      </div>
+      <img src="imagenes/cisco-netacad.png" alt="Logo Derecho" class="logo logo-right">
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>1er. Módulo [ITN]</th>
+          <th>2do. Módulo [SRWE]</th>
+          <th>3er. Módulo [ENSA]</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td data-modulo="1er. Módulo [ITN]">
+            <div class="curso-card">
+              <div class="curso-titulo">
+                CCNAv7: ITN (DomPM)
+                <small>Inicio: 1ero. de Marzo de 2026</small>
+              </div>
+              <a href="https://spinetti-ccna.github.io/itn_dom-pm_1ero-mar-2026/" target="_blank" class="thumbnail-container">
+                <img src="imagenes/preview-itn-dom-mar-2026.jpg" alt="ITN DomPM Marzo 2026">
+                <span class="play-button">Ver Curso</span>
+              </a>
+            </div>
+          </td>
+          <td data-modulo="2do. Módulo [SRWE]">
+            <div class="curso-card">
+              <div class="curso-titulo">
+                CCNAv7: SRWE (SabPM)
+                <small>Inicio: 22 de Noviembre de 2025</small>
+              </div>
+              <a href="https://spinetti-ccna.github.io/srwe_sab-pm_22-nov-2025/" target="_blank" class="thumbnail-container">
+                <img src="imagenes/preview-srwe-sab-nov-2025.jpg" alt="SRWE SabPM Noviembre 2025">
+                <span class="play-button">Ver Curso</span>
+              </a>
+            </div>
+          </td>
+          <td data-modulo="3er. Módulo [ENSA]">
+            <div class="curso-card">
+              <div class="curso-titulo">
+                CCNAv7: ENSA (DomPM)
+                <small>Inicio: 29 de Junio de 2025</small>
+              </div>
+              <a href="https://spinetti-ccna.github.io/ensa_dom-pm_29-jun-2025/" target="_blank" class="thumbnail-container">
+                <img src="imagenes/preview-ensa-dom-jun.jpg" alt="ENSA DomPM Junio 2025">
+                <span class="play-button">Ver Curso</span>
+              </a>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td data-modulo="1er. Módulo [ITN]">
+            <div class="curso-card">
+              <div class="curso-titulo">
+                CCNAv7: ITN (DomAM)
+                <small>Inicio: 12 de Octubre de 2025</small>
+              </div>
+              <a href="https://spinetti-ccna.github.io/itn_dom-am_12-oct-2025/" target="_blank" class="thumbnail-container">
+                <img src="imagenes/preview-itn-dom-oct.jpg" alt="ITN DomAM Octubre 2025">
+                <span class="play-button">Ver Curso</span>
+              </a>
+            </div>
+          </td>
+          <td data-modulo="2do. Módulo [SRWE]">
+            <div class="curso-card">
+              <div class="curso-titulo">
+                CCNAv7: SRWE (SabAM)
+                <small>Inicio: 28 de Junio de 2025</small>
+              </div>
+              <a href="https://spinetti-ccna.github.io/srwe_sab-am_28-jun-2025/" target="_blank" class="thumbnail-container">
+                <img src="imagenes/preview-srwe-sab-jun.jpg" alt="SRWE SabAM Junio 2025">
+                <span class="play-button">Ver Curso</span>
+              </a>
+            </div>
+          </td>
+          <td data-modulo="3er. Módulo [ENSA]">
+            <div class="curso-card">
+              <div class="curso-titulo">
+                CCNAv7: ENSA (DomAM)
+                <small>Inicio: 23 de Marzo de 2025</small>
+              </div>
+              <a href="https://spinetti-ccna.github.io/ensa_dom-am_23-mar-2025/" target="_blank" class="thumbnail-container">
+                <img src="imagenes/preview-ensa-dom-mar.jpg" alt="ENSA DomAM Marzo 2025">
+                <span class="play-button">Ver Curso</span>
+              </a>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td data-modulo="1er. Módulo [ITN]">
+            <div class="curso-card">
+              <div class="curso-titulo">
+                CCNAv7: ITN (SabPM)
+                <small>Inicio: 28 de Junio de 2025</small>
+              </div>
+              <a href="https://spinetti-ccna.github.io/itn_sab-pm_28-jun-2025/" target="_blank" class="thumbnail-container">
+                <img src="imagenes/preview-itn-sab-jun.jpg" alt="ITN SabPM Junio 2025">
+                <span class="play-button">Ver Curso</span>
+              </a>
+            </div>
+          </td>
+          <td>
+            </td>
+          <td>
+            </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <footer>
+      <p>Curso CCNAv7 impartido por el Instructor Gustavo Spinetti | Contacto:
+        <a href="mailto:gustavoaspinettim@yahoo.es">gustavoaspinettim@yahoo.es</a>
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
