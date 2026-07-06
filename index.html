@@ -37,9 +37,10 @@
       border-bottom: 2px solid #e5e7eb;
     }
 
+    /* MODIFICADO: Tamaño de los 3 círculos aumentado a 150px */
     .logo {
-      width: 120px;
-      height: 120px;
+      width: 150px;
+      height: 150px;
       border-radius: 50%;
       object-fit: cover;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -185,9 +186,11 @@
         align-items: center;
       }
 
+      /* MODIFICADO: Tamaño óptimo para albergar 3 logos en móvil */
       .logo {
-        width: 90px;
-        height: 90px;
+        width: 95px;
+        height: 95px;
+        margin: 5px;
       }
 
       .header-text h1 {
@@ -205,7 +208,7 @@
       }
 
       th {
-        display: none; /* Se ocultan los encabezados de tabla en móviles */
+        display: none;
       }
 
       tr {
@@ -217,7 +220,6 @@
         padding: 15px 10px;
       }
 
-      /* Añade una etiqueta visual en móvil para saber qué módulo es cada curso */
       td::before {
         content: attr(data-modulo);
         display: block;
@@ -242,7 +244,9 @@
   <div class="container">
     
     <div class="header-content">
-      <img src="imagenes/logo-circular.jpg" alt="Logo Izquierdo" class="logo logo-left">
+      <img src="imagenes/amen-vzla.png" alt="Bendiciones para Venezuela, ¡Amén!" class="logo logo-left">
+      <img src="imagenes/logo-circular.jpg" alt="Instructor Gustavo Spinetti" class="logo logo-left">
+      
       <div class="header-text">
         <h2>Cisco Certified Network Associate</h2>
         <h1>CCNAv7 [ITN - SRWE - ENSA]</h1>
@@ -314,7 +318,7 @@ Inicio: 28 de Junio de 2025" target="_blank" class="thumbnail-container">
           <td data-modulo="3er. Módulo [ENSA]">
             <div class="curso-card">
               <a href="https://spinetti-ccna.github.io/ensa_dom-am_23-mar-2025/" title="CCNAv7: ENSA (DomAM)
-              Inicio: 23 de Marzo de 2025" target="_blank" class="thumbnail-container">
+Inicio: 23 de Marzo de 2025" target="_blank" class="thumbnail-container">
                 <img src="imagenes/cursos/ensa/ENSA 23Mar25.png" alt="ENSA DomAM Marzo 2025">
                 <span class="play-button">Ver Curso</span>
               </a>
@@ -332,10 +336,8 @@ Inicio: 28 de Junio de 2025" target="_blank" class="thumbnail-container">
               </a>
             </div>
           </td>
-          <td>
-            </td>
-          <td>
-            </td>
+          <td></td>
+          <td></td>
         </tr>
 
       </tbody>
