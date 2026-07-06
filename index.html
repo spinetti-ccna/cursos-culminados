@@ -140,3 +140,254 @@
 
     /* MODIFICADO: Incorporación de PROTECCIÓN ANTI-COPIA en las capturas de los cursos */
     .thumbnail-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      
+      /* Protección CSS */
+      pointer-events: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    /* MODIFICADO: El efecto hover ahora se activa mediante el contenedor para saltarse el bloqueo de puntero */
+    .thumbnail-container:hover img {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(30, 58, 138, 0.9);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 5px;
+      font-size: 14px;
+      font-weight: bold;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .thumbnail-container:hover .play-button {
+      opacity: 1;
+    }
+
+    tr:hover {
+      background: #f1f5f9;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 12px;
+      color: #666;
+    }
+
+    footer a {
+      color: #1e3a8a;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Adaptación móvil (Vertical) */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* Mantiene los dos logos izquierdos organizados en fila horizontal en móviles */
+      .logo-group-left {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .logo {
+        width: 95px;
+        height: 95px;
+        margin: 5px;
+      }
+
+      .header-text h1 {
+        font-size: 22px;
+      }
+
+      .header-text h2 {
+        font-size: 16px;
+      }
+
+      table, tbody, tr, th, td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      th {
+        display: none;
+      }
+
+      tr {
+        border-bottom: 2px solid #e5e7eb;
+      }
+
+      td {
+        border-bottom: none;
+        padding: 15px 10px;
+      }
+
+      td::before {
+        content: attr(data-modulo);
+        display: block;
+        background: #1e3a8a;
+        color: #fff;
+        font-size: 11px;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 4px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+      }
+
+      .curso-titulo {
+        min-height: auto;
+        margin-bottom: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <div class="header-content">
+      <div class="logo-group-left">
+        <img src="imagenes/amen-vzla.png" alt="Bendiciones para Venezuela, ¡Amén!" class="logo">
+        <img src="imagenes/instructor_gustavo_spinetti.jpg" alt="Instructor Gustavo Spinetti" class="logo">
+      </div>
+      
+      <div class="header-text">
+        <h2>Cisco Certified Network Associate</h2>
+        <h1>CCNAv7 [ITN - SRWE - ENSA]</h1>
+        <h2>Bitácora de Repositorios - Cursos Culminados</h2>
+        <h1>Instructor Gustavo Spinetti</h1>
+      </div>
+      <img src="imagenes/cisco-netacad.png" alt="Logo Derecho" class="logo logo-right">
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>1er. Módulo [ITN]</th>
+          <th>2do. Módulo [SRWE]</th>
+          <th>3er. Módulo [ENSA]</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td data-modulo="1er. Módulo [ITN]">
+            <div class="curso-card">
+              <a href="https://spinetti-ccna.github.io/itn_dom-pm_1ero-mar-2026/" title="CCNAv7: ITN (DomPM)&#10;Inicio: 1ero. de Marzo de 2026" target="_blank" class="thumbnail-container">
+                <img src="imagenes/cursos/itn/ITN 01Mar26.png" alt="ITN DomPM Marzo 2026">
+                <span class="play-button">Ver Curso</span>
+              </a>
+            </div>
+          </td>
+          <td data-modulo="2do. Módulo [SRWE]">
+            <div class="curso-card">
+              <a href="https://spinetti-ccna.github.io/srwe_sab-pm_22-nov-2025/" title="CCNAv7: SRWE (SabPM)&#10;Inicio: 22 de Noviembre de 2025" target="_blank" class="thumbnail-container">
+                <img src="imagenes/cursos/srwe/SRWE 22Nov25.png" alt="SRWE SabPM Noviembre 2025">
+                <span class="play-button">Ver Curso</span>
+              </a>
+            </div>
+          </td>
+          <td data-modulo="3er. Módulo [ENSA]">
+            <div class="curso-card">
+              <a href="https://spinetti-ccna.github.io/ensa_dom-pm_29-jun-2025/" title="CCNAv7: ENSA (DomPM)&#10;Inicio: 29 de Junio de 2025" target="_blank" class="thumbnail-container">
+                <img src="imagenes/cursos/ensa/ENSA 29Jun25.png" alt="ENSA DomPM Junio 2025">
+                <span class="play-button">Ver Curso</span>
+              </a>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td data-modulo="1er. Módulo [ITN]">
+            <div class="curso-card">
+              <a href="https://spinetti-ccna.github.io/itn_dom-am_12-oct-2025/" title="CCNAv7: ITN (DomAM)&#10;Inicio: 12 de Octubre de 2025" target="_blank" class="thumbnail-container">
+                <img src="imagenes/cursos/itn/ITN 12Oct25.png" alt="ITN DomAM Octubre 2025">
+                <span class="play-button">Ver Curso</span>
+              </a>
+            </div>
+          </td>
+          <td data-modulo="2do. Módulo [SRWE]">
+            <div class="curso-card">
+              <a href="https://spinetti-ccna.github.io/srwe_sab-am_28-jun-2025/" title="CCNAv7: SRWE (SabAM)&#10;Inicio: 28 de Junio de 2025" target="_blank" class="thumbnail-container">
+                <img src="imagenes/cursos/srwe/SRWE 28Jun25.png" alt="SRWE SabAM Junio 2025">
+                <span class="play-button">Ver Curso</span>
+              </a>
+            </div>
+          </td>
+          <td data-modulo="3er. Módulo [ENSA]">
+            <div class="curso-card">
+              <a href="https://spinetti-ccna.github.io/ensa_dom-am_23-mar-2025/" title="CCNAv7: ENSA (DomAM)&#10;Inicio: 23 de Marzo de 2025" target="_blank" class="thumbnail-container">
+                <img src="imagenes/cursos/ensa/ENSA 23Mar25.png" alt="ENSA DomAM Marzo 2025">
+                <span class="play-button">Ver Curso</span>
+              </a>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td data-modulo="1er. Módulo [ITN]">
+            <div class="curso-card">
+              <a href="https://spinetti-ccna.github.io/itn_sab-pm_28-jun-2025/" title="CCNAv7: ITN (SabPM)&#10;Inicio: 28 de Junio de 2025" target="_blank" class="thumbnail-container">
+                <img src="imagenes/cursos/itn/ITN 28Jun25.png" alt="ITN SabPM Junio 2025">
+                <span class="play-button">Ver Curso</span>
+              </a>
+            </div>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <footer>
+      <p>Curso CCNAv7 impartido por el Instructor Gustavo Spinetti | Contacto:
+        <a href="mailto:gustavoaspinettim@yahoo.es">gustavoaspinettim@yahoo.es</a>
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // Desactiva el menú contextual del clic derecho únicamente para las imágenes
+    document.addEventListener('contextmenu', function(e) {
+      if (e.target.nodeName === 'IMG') {
+        e.preventDefault();
+      }
+    });
+
+    // Desactiva la acción de arrastrar las imágenes hacia el escritorio o carpetas
+    document.addEventListener('dragstart', function(e) {
+      if (e.target.nodeName === 'IMG') {
+        e.preventDefault();
+      }
+    });
+  </script>
+</body>
+</html>
