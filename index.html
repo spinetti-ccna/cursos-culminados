@@ -767,6 +767,66 @@ Inicio: 23 de Marzo de 2025" target="_blank" rel="noopener noreferrer" class="th
           e.preventDefault();
         }
       });
+
+
+/* INICIO DE AUDIO */
+
+        const playHoverSound = () => {
+        if (!soundEnabled) return;
+        try {
+          initAudio();
+          if (audioCtx.state !== 'running') return;
+
+          const now = audioCtx.currentTime;
+          const duration = 0.28; // Duración de la brisa (280 ms)
+
+          // 1. Generar ruido suave (aire / viento)
+          const bufferSize = Math.floor(audioCtx.sampleRate * duration);
+          const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+          const output = noiseBuffer.getChannelData(0);
+          
+          // Filtro interno para suavizar el ruido hacia un tono cálido (tipo ruido rosa)
+          let b0 = 0, b1 = 0, b2 = 0;
+          for (let i = 0; i < bufferSize; i++) {
+            const white = Math.random() * 2 - 1;
+            b0 = 0.99765 * b0 + white * 0.0990460;
+            b1 = 0.96300 * b1 + white * 0.2965164;
+            b2 = 0.57000 * b2 + white * 1.0526913;
+            output[i] = (b0 + b1 + b2 + white * 0.1848) * 0.15;
+          }
+
+          const noiseSource = audioCtx.createBufferSource();
+          noiseSource.buffer = noiseBuffer;
+
+          // 2. Filtro pasa-banda grave para simular el paso del viento
+          const filter = audioCtx.createBiquadFilter();
+          filter.type = 'bandpass';
+          filter.Q.value = 1.8; // Suavidad del flujo de aire
+          filter.frequency.setValueAtTime(220, now);
+          filter.frequency.exponentialRampToValueAtTime(420, now + duration * 0.45);
+          filter.frequency.exponentialRampToValueAtTime(180, now + duration);
+
+          // 3. Envolvente gradual (entrada y salida aterciopelada sin golpes)
+          const gainNode = audioCtx.createGain();
+          gainNode.gain.setValueAtTime(0.001, now);
+          gainNode.gain.linearRampToValueAtTime(0.28, now + duration * 0.35);
+          gainNode.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+          // Conectar nodos y reproducir
+          noiseSource.connect(filter);
+          filter.connect(gainNode);
+          gainNode.connect(audioCtx.destination);
+
+          noiseSource.start(now);
+          noiseSource.stop(now + duration);
+        } catch (e) {
+          // Silencioso ante restricciones del navegador
+        }
+      };
+      
+/* FIN DE AUDIO */
+      
+      
     });
   </script>
 
