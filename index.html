@@ -3,197 +3,367 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cursos Culminados de CCNAv7</title>
+  <title>Cursos Culminados de CCNAv7 | Instructor Gustavo Spinetti</title>
   <link rel="icon" href="imagenes/favicon_red.ico" type="image/x-icon" />
+
   <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(135deg, #1e3a8a, #60a5fa);
+    :root {
+      --primary-color: #0b3c5d;      /* Azul Cisco institucional */
+      --secondary-color: #0288d1;    /* Azul dinámico / enlaces */
+      --accent-color: #d92525;       /* Rojo de acento */
+      --bg-color: #f4f7f9;           /* Fondo gris claro limpio */
+      --card-bg: #ffffff;
+      --text-main: #0b3c5d;          /* Títulos y textos principales en azul */
+      --text-muted: #0b3c5d;         /* Subtítulos en azul */
+      --border-color: #e2e8f0;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --transition: all 0.25s ease-in-out;
+    }
+
+    /* MODO OSCURO */
+    body.dark-mode {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --text-main: #38bdf8;
+      --text-muted: #94a3b8;
+      --border-color: #334155;
+      --shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
-      padding: 20px;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.5;
       display: flex;
-      justify-content: center;
-      align-items: center;
+      flex-direction: column;
       min-height: 100vh;
-      color: #fff;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     .container {
-      max-width: 1100px;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 20px 15px;
       width: 100%;
-      background: #fff;
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      flex: 1;
     }
 
-    .header-content {
+    /* BARRA SUPERIOR DE ACCIONES */
+    .top-actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .btn-action {
+      background: var(--card-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      padding: 7px 14px;
+      border-radius: 50px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+    }
+
+    .btn-action:hover {
+      border-color: var(--secondary-color);
+      color: var(--secondary-color);
+      transform: translateY(-1px);
+    }
+
+    /* HEADER */
+    .header-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 25px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: nowrap;
-      text-align: center;
-      padding-bottom: 20px;
-      border-bottom: 2px solid #e5e7eb;
+      gap: 20px;
+      margin-bottom: 25px;
+      border-top: 5px solid var(--primary-color);
     }
 
-    /* SOLUCIÓN ALINEACIÓN: Agrupa los logos izquierdos para que Flexbox no los disperse */
     .logo-group-left {
       display: flex;
       align-items: center;
+      gap: 12px;
       flex-shrink: 0;
     }
 
-    /* MODIFICADO: Tamaño a 150px e incorporación de PROTECCIÓN ANTI-COPIA */
-    .logo {
-      width: 150px;
-      height: 150px;
+    /* LOGOS DE CABECERA: MODO CLARO (SOMBRA AZUL DEGRADADA) */
+    .header-logo {
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
       object-fit: cover;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      margin: 10px;
+      background-color: #ffffff;
       flex-shrink: 0;
-      
-      /* Protección CSS */
+      border: 1px solid rgba(2, 136, 209, 0.45);
+      box-shadow: 
+        0 4px 14px rgba(11, 60, 93, 0.85),
+        0 0 18px rgba(2, 136, 209, 0.65),
+        inset 0 1px 3px rgba(255, 255, 255, 0.4);
+      transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.25s ease;
       pointer-events: none;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
       user-select: none;
+      -webkit-user-select: none;
     }
 
-    .header-text {
+    /* LOGOS DE CABECERA: MODO OSCURO (BRILLO BLANCO INTENSO) */
+    body.dark-mode .header-logo {
+      border: 2px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.9),
+        0 0 22px rgba(255, 255, 255, 0.75),
+        0 0 35px rgba(255, 255, 255, 0.55),
+        0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .header-content {
+      text-align: center;
       flex: 1;
-      padding: 10px;
     }
 
-    .header-text h1 {
-      margin: 0;
-      font-size: 28px;
-      color: #1e3a8a;
+    .header-content h1 {
+      font-size: 1.5rem;
+      color: var(--text-main);
+      margin-bottom: 4px;
     }
 
-    .header-text h2 {
-      margin: 8px 0;
-      font-size: 18px;
-      color: #1e3a8a;
+    .header-content h2 {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 4px;
     }
 
-    table {
+    /* BARRA DE BÚSQUEDA REDONDEADA Y COMPACTA */
+    .search-wrapper {
+      max-width: 550px;
+      margin: 0 auto 10px auto;
+      position: relative;
       width: 100%;
-      border-collapse: collapse;
-      background: #f8fafc;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 10px 20px 10px 42px;
+      font-size: 0.95rem;
+      border: 1px solid var(--border-color);
+      border-radius: 50px;
+      background: var(--card-bg);
+      color: var(--text-main);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .search-input:focus {
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 0 3px rgba(2, 136, 209, 0.2);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 1rem;
+      pointer-events: none;
+    }
+
+    /* CONTADOR DINÁMICO */
+    .search-counter {
+      text-align: center;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 25px;
+      font-weight: 500;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      display: none;
+      background: var(--card-bg);
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      margin-bottom: 25px;
+    }
+
+    /* GRID DE CURSOS */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .course-card {
+      background: var(--card-bg);
       border-radius: 12px;
       overflow: hidden;
-      margin-top: 20px;
-      table-layout: fixed;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+      border: 1px solid var(--border-color);
+      position: relative;
     }
 
-    th, td {
-      padding: 20px;
-      font-size: 14px;
-      border-bottom: 1px solid #e0e0e0;
-      text-align: center;
-      vertical-align: top;
-      color: #333;
+    .course-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
     }
 
-    th {
-      background: #1e3a8a;
-      color: #fff;
+    /* CABECERA DE LA TARJETA (MÓDULO) */
+    .module-badge {
+      background: var(--primary-color);
+      color: #ffffff;
+      font-size: 0.82rem;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      padding: 8px 12px;
+      text-align: center;
     }
 
-    .curso-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      height: 100%;
-    }
-
-    .curso-titulo {
-      color: #1e3a8a;
-      font-weight: bold;
-      font-size: 15px;
-      margin-bottom: 10px;
-      min-height: 45px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .curso-titulo small {
-      color: #4b5563;
-      font-weight: normal;
-      margin-top: 4px;
+    body.dark-mode .module-badge {
+      background: #1e3a8a;
+      color: #e0f2fe;
     }
 
     .thumbnail-container {
       position: relative;
-      display: inline-block;
       width: 100%;
-      border-radius: 8px;
+      padding-top: 56.25%; /* 16:9 Aspect Ratio */
+      background-color: #0b3c5d;
       overflow: hidden;
-    }
-
-    /* MODIFICADO: Incorporación de PROTECCIÓN ANTI-COPIA en las capturas de los cursos */
-    .thumbnail-container img {
-      width: 100%;
-      height: auto;
       display: block;
-      border-radius: 8px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      
-      /* Protección CSS */
-      pointer-events: none;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
     }
 
-    /* MODIFICADO: El efecto hover ahora se activa mediante el contenedor para saltarse el bloqueo de puntero */
-    .thumbnail-container:hover img {
-      transform: scale(1.1);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    .play-button {
+    .thumbnail-container img {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(30, 58, 138, 0.9);
-      color: #fff;
-      padding: 10px 16px;
-      border-radius: 5px;
-      font-size: 14px;
-      font-weight: bold;
-      opacity: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
       pointer-events: none;
-      transition: opacity 0.3s ease;
-      white-space: nowrap;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
-    .thumbnail-container:hover .play-button {
+    .course-card:hover .thumbnail-container img {
+      transform: scale(1.03);
+    }
+
+    .play-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .course-card:hover .play-overlay {
       opacity: 1;
     }
 
-    tr:hover {
-      background: #f1f5f9;
+    .play-btn-circle {
+      background: rgba(11, 60, 93, 0.95);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.4rem;
+      padding-left: 4px;
+      padding-bottom: 3px;
+      line-height: 1;
+      border: 2px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.9),
+        0 0 22px rgba(255, 255, 255, 0.75),
+        0 0 35px rgba(255, 255, 255, 0.55),
+        0 4px 15px rgba(0, 0, 0, 0.4);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
+    .course-card:hover .play-btn-circle {
+      transform: scale(1.08);
+      box-shadow: 
+        0 0 14px rgba(255, 255, 255, 1),
+        0 0 28px rgba(255, 255, 255, 0.9),
+        0 0 45px rgba(255, 255, 255, 0.7),
+        0 6px 18px rgba(0, 0, 0, 0.45);
+    }
+
+    /* BOTÓN FLOTANTE VOLVER ARRIBA */
+    .scroll-top-btn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      color: #ffffff;
+      border: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: var(--transition);
+      z-index: 100;
+    }
+
+    .scroll-top-btn:hover {
+      background: var(--secondary-color);
+      transform: translateY(-3px);
+    }
+
+    /* FOOTER */
     footer {
+      background: var(--card-bg);
+      border-top: 1px solid var(--border-color);
+      padding: 20px;
       text-align: center;
-      margin-top: 20px;
-      font-size: 12px;
-      color: #666;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-top: 40px;
     }
 
     footer a {
-      color: #1e3a8a;
+      color: var(--secondary-color);
       text-decoration: none;
       font-weight: 500;
     }
@@ -202,209 +372,355 @@
       text-decoration: underline;
     }
 
-    /* Adaptación móvil (Vertical) */
+    /* RESPONSIVE */
     @media (max-width: 768px) {
-      .header-content {
+      .header-card {
         flex-direction: column;
-        align-items: center;
+        text-align: center;
       }
-
-      /* Mantiene los dos logos izquierdos organizados en fila horizontal en móviles */
       .logo-group-left {
-        flex-direction: row;
         justify-content: center;
         flex-wrap: wrap;
       }
-
-      .logo {
-        width: 95px;
-        height: 95px;
-        margin: 5px;
+      .header-logo {
+        width: 85px;
+        height: 85px;
       }
-
-      .header-text h1 {
-        font-size: 22px;
-      }
-
-      .header-text h2 {
-        font-size: 16px;
-      }
-
-      table, tbody, tr, th, td {
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
-      }
-
-      th {
-        display: none;
-      }
-
-      tr {
-        border-bottom: 2px solid #e5e7eb;
-      }
-
-      td {
-        border-bottom: none;
-        padding: 15px 10px;
-      }
-
-      td::before {
-        content: attr(data-modulo);
-        display: block;
-        background: #1e3a8a;
-        color: #fff;
-        font-size: 11px;
-        font-weight: bold;
-        text-transform: uppercase;
-        padding: 4px;
-        margin-bottom: 10px;
-        border-radius: 4px;
-      }
-
-      .curso-titulo {
-        min-height: auto;
-        margin-bottom: 8px;
+      .courses-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
+
   <div class="container">
-    
-    <div class="header-content">
-      <div class="logo-group-left">
-        <img src="imagenes/amen-vzla.png" alt="Bendiciones para Venezuela, ¡Amén!" class="logo">
-        <img src="imagenes/instructor_gustavo_spinetti.jpg" alt="Instructor Gustavo Spinetti" class="logo">
-      </div>
-      
-      <div class="header-text">
-        <h2>Cisco Certified Network Associate</h2>
-        <h1>CCNAv7 [ITN - SRWE - ENSA]</h1>
-        <h2>Bitácora de Repositorios - Cursos Culminados</h2>
-        <h1>Instructor Gustavo Spinetti</h1>
-      </div>
-      <img src="imagenes/cisco-netacad.png" alt="Logo Derecho" class="logo logo-right">
+
+    <!-- BARRA SUPERIOR DE ACCIONES -->
+    <div class="top-actions">
+      <button id="themeToggle" class="btn-action" type="button" aria-label="Cambiar tema">
+        🌙 Modo Oscuro
+      </button>
     </div>
 
-    <table>
-      <thead>
-        <tr>
-          <th>1er. Módulo [ITN]</th>
-          <th>2do. Módulo [SRWE]</th>
-          <th>3er. Módulo [ENSA]</th>
-        </tr>
-      </thead>
-      <tbody>
-        
-        <!-- Fila 1 (Más recientes) -->
-        <tr>
-          <td data-modulo="1er. Módulo [ITN]">
-            <div class="curso-card">
-              <a href="https://spinetti-ccna.github.io/itn_dom-pm_1ero-mar-2026/" title="CCNAv7: ITN (DomPM)&#10;Inicio: 1ero. de Marzo de 2026" target="_blank" class="thumbnail-container">
-                <img src="imagenes/cursos/itn/ITN 01Mar26.png" alt="ITN DomPM Marzo 2026">
-                <span class="play-button">Ver Curso</span>
-              </a>
-            </div>
-          </td>
-          <td data-modulo="2do. Módulo [SRWE]">
-            <div class="curso-card">
-              <a href="https://spinetti-ccna.github.io/srwe_dom-am_26-abr-2026/" title="CCNAv7: SRWE (DomAM)&#10;Inicio: 26 de Abril de 2026" target="_blank" class="thumbnail-container">
-                <img src="imagenes/cursos/srwe/SRWE 26Abr26.png" alt="SRWE DomAM Abril 2026">
-                <span class="play-button">Ver Curso</span>
-              </a>
-            </div>
-          </td>
-          <td data-modulo="3er. Módulo [ENSA]">
-            <div class="curso-card">
-              <a href="https://spinetti-ccna.github.io/ensa_sab-am_21-mar-2026/" title="CCNAv7: ENSA (SabAM)&#10;Inicio: 21 de Marzo de 2026" target="_blank" class="thumbnail-container">
-                <img src="imagenes/cursos/ensa/ENSA 21Mar26.png" alt="ENSA SabAM Marzo 2026">
-                <span class="play-button">Ver Curso</span>
-              </a>
-            </div>
-          </td>
-        </tr>
+    <!-- ENCABEZADO -->
+    <header class="header-card">
+      <div class="logo-group-left">
+        <img src="imagenes/amen-vzla.png" alt="Bendiciones para Venezuela, ¡Amén!" class="header-logo" width="110" height="110">
+        <img src="imagenes/instructor_gustavo_spinetti.jpg" alt="Instructor Gustavo Spinetti" class="header-logo" width="110" height="110">
+      </div>
+      
+      <div class="header-content">
+        <h2>Cisco Certified Network Associate</h2>
+        <h1>CCNAv7 [ITN - SRWE - ENSA]</h1>
+        <h2>Bitácora de Repositorios — Cursos Culminados</h2>
+        <h2>Instructor Gustavo Spinetti</h2>
+      </div>
 
-        <!-- Fila 2 -->
-        <tr>
-          <td data-modulo="1er. Módulo [ITN]">
-            <div class="curso-card">
-              <a href="https://spinetti-ccna.github.io/itn_dom-am_12-oct-2025/" title="CCNAv7: ITN (DomAM)&#10;Inicio: 12 de Octubre de 2025" target="_blank" class="thumbnail-container">
-                <img src="imagenes/cursos/itn/ITN 12Oct25.png" alt="ITN DomAM Octubre 2025">
-                <span class="play-button">Ver Curso</span>
-              </a>
-            </div>
-          </td>
-          <td data-modulo="2do. Módulo [SRWE]">
-            <div class="curso-card">
-              <a href="https://spinetti-ccna.github.io/srwe_sab-pm_22-nov-2025/" title="CCNAv7: SRWE (SabPM)&#10;Inicio: 22 de Noviembre de 2025" target="_blank" class="thumbnail-container">
-                <img src="imagenes/cursos/srwe/SRWE 22Nov25.png" alt="SRWE SabPM Noviembre 2025">
-                <span class="play-button">Ver Curso</span>
-              </a>
-            </div>
-          </td>
-          <td data-modulo="3er. Módulo [ENSA]">
-            <div class="curso-card">
-              <a href="https://spinetti-ccna.github.io/ensa_dom-pm_29-jun-2025/" title="CCNAv7: ENSA (DomPM)&#10;Inicio: 29 de Junio de 2025" target="_blank" class="thumbnail-container">
-                <img src="imagenes/cursos/ensa/ENSA 29Jun25.png" alt="ENSA DomPM Junio 2025">
-                <span class="play-button">Ver Curso</span>
-              </a>
-            </div>
-          </td>
-        </tr>
+      <img src="imagenes/cisco-netacad.png" alt="Logo Derecho" class="header-logo" width="110" height="110">
+    </header>
 
-        <!-- Fila 3 -->
-        <tr>
-          <td data-modulo="1er. Módulo [ITN]">
-            <div class="curso-card">
-              <a href="https://spinetti-ccna.github.io/itn_sab-pm_28-jun-2025/" title="CCNAv7: ITN (SabPM)&#10;Inicio: 28 de Junio de 2025" target="_blank" class="thumbnail-container">
-                <img src="imagenes/cursos/itn/ITN 28Jun25.png" alt="ITN SabPM Junio 2025">
-                <span class="play-button">Ver Curso</span>
-              </a>
-            </div>
-          </td>
-          <td data-modulo="2do. Módulo [SRWE]">
-            <div class="curso-card">
-              <a href="https://spinetti-ccna.github.io/srwe_sab-am_28-jun-2025/" title="CCNAv7: SRWE (SabAM)&#10;Inicio: 28 de Junio de 2025" target="_blank" class="thumbnail-container">
-                <img src="imagenes/cursos/srwe/SRWE 28Jun25.png" alt="SRWE SabAM Junio 2025">
-                <span class="play-button">Ver Curso</span>
-              </a>
-            </div>
-          </td>
-          <td data-modulo="3er. Módulo [ENSA]">
-            <div class="curso-card">
-              <a href="https://spinetti-ccna.github.io/ensa_dom-am_23-mar-2025/" title="CCNAv7: ENSA (DomAM)&#10;Inicio: 23 de Marzo de 2025" target="_blank" class="thumbnail-container">
-                <img src="imagenes/cursos/ensa/ENSA 23Mar25.png" alt="ENSA DomAM Marzo 2025">
-                <span class="play-button">Ver Curso</span>
-              </a>
-            </div>
-          </td>
-        </tr>
+    <!-- FORMULARIO DE BÚSQUEDA -->
+    <section class="search-wrapper">
+      <span class="search-icon" aria-hidden="true">🔍</span>
+      <input 
+        type="search" 
+        id="courseSearch" 
+        class="search-input" 
+        placeholder="Buscar curso por módulo, fecha, horario o año (ej. ITN, SRWE, ENSA, 2026, SabPM)..."
+        aria-label="Buscar cursos culminados"
+        autocomplete="off"
+      >
+    </section>
 
-      </tbody>
-    </table>
+    <!-- CONTADOR DINÁMICO DE RESULTADOS -->
+    <div id="searchCounter" class="search-counter">
+      Cargando cursos...
+    </div>
 
-    <footer>
-      <p>Curso CCNAv7 impartido por el Instructor Gustavo Spinetti | Contacto:
-        <a href="mailto:gustavoaspinettim@yahoo.es">gustavoaspinettim@yahoo.es</a>
-      </p>
-    </footer>
+    <!-- MENSAJE DE ESTADO: SIN RESULTADOS -->
+    <div id="noResults" class="no-results" role="status" aria-live="polite">
+      No se encontraron cursos que coincidan con tu búsqueda.
+    </div>
+
+    <!-- LISTADO DE CURSOS CULMINADOS EN GRID -->
+    <main class="courses-grid" id="coursesGrid">
+
+      <!-- Fila 1 - ITN -->
+      <article 
+        class="course-card"
+        data-module="1er. Módulo [ITN]"
+        data-title="CCNAv7 ITN DomPM Marzo 2026"
+        data-date="01/Mar/2026 1ero de Marzo de 2026 01Mar26"
+        data-keywords="itn introduccion a redes dompm domingo marzo 2026 modulo 1"
+      >
+        <div class="module-badge">1er. Módulo [ITN]</div>
+        <a href="https://spinetti-ccna.github.io/itn_dom-pm_1ero-mar-2026/" title="CCNAv7: ITN (DomPM)
+Inicio: 1ero. de Marzo de 2026" target="_blank" rel="noopener noreferrer" class="thumbnail-container">
+          <img src="imagenes/cursos/itn/ITN 01Mar26.png" alt="ITN DomPM Marzo 2026" loading="lazy">
+          <div class="play-overlay">
+            <span class="play-btn-circle" aria-hidden="true">▶</span>
+          </div>
+        </a>
+      </article>
+
+      <!-- Fila 1 - SRWE -->
+      <article 
+        class="course-card"
+        data-module="2do. Módulo [SRWE]"
+        data-title="CCNAv7 SRWE DomAM Abril 2026"
+        data-date="26/Abr/2026 26 de Abril de 2026 26Abr26"
+        data-keywords="srwe switches routers switching wireless domam domingo abril 2026 modulo 2"
+      >
+        <div class="module-badge">2do. Módulo [SRWE]</div>
+        <a href="https://spinetti-ccna.github.io/srwe_dom-am_26-abr-2026/" title="CCNAv7: SRWE (DomAM)
+Inicio: 26 de Abril de 2026" target="_blank" rel="noopener noreferrer" class="thumbnail-container">
+          <img src="imagenes/cursos/srwe/SRWE 26Abr26.png" alt="SRWE DomAM Abril 2026" loading="lazy">
+          <div class="play-overlay">
+            <span class="play-btn-circle" aria-hidden="true">▶</span>
+          </div>
+        </a>
+      </article>
+
+      <!-- Fila 1 - ENSA -->
+      <article 
+        class="course-card"
+        data-module="3er. Módulo [ENSA]"
+        data-title="CCNAv7 ENSA SabAM Marzo 2026"
+        data-date="21/Mar/2026 21 de Marzo de 2026 21Mar26"
+        data-keywords="ensa enterprise redes empresariales seguridad automatizacion sabam sabado marzo 2026 modulo 3"
+      >
+        <div class="module-badge">3er. Módulo [ENSA]</div>
+        <a href="https://spinetti-ccna.github.io/ensa_sab-am_21-mar-2026/" title="CCNAv7: ENSA (SabAM)
+Inicio: 21 de Marzo de 2026" target="_blank" rel="noopener noreferrer" class="thumbnail-container">
+          <img src="imagenes/cursos/ensa/ENSA 21Mar26.png" alt="ENSA SabAM Marzo 2026" loading="lazy">
+          <div class="play-overlay">
+            <span class="play-btn-circle" aria-hidden="true">▶</span>
+          </div>
+        </a>
+      </article>
+
+      <!-- Fila 2 - ITN -->
+      <article 
+        class="course-card"
+        data-module="1er. Módulo [ITN]"
+        data-title="CCNAv7 ITN DomAM Octubre 2025"
+        data-date="12/Oct/2025 12 de Octubre de 2025 12Oct25"
+        data-keywords="itn introduccion a redes domam domingo octubre 2025 modulo 1"
+      >
+        <div class="module-badge">1er. Módulo [ITN]</div>
+        <a href="https://spinetti-ccna.github.io/itn_dom-am_12-oct-2025/" title="CCNAv7: ITN (DomAM)
+Inicio: 12 de Octubre de 2025" target="_blank" rel="noopener noreferrer" class="thumbnail-container">
+          <img src="imagenes/cursos/itn/ITN 12Oct25.png" alt="ITN DomAM Octubre 2025" loading="lazy">
+          <div class="play-overlay">
+            <span class="play-btn-circle" aria-hidden="true">▶</span>
+          </div>
+        </a>
+      </article>
+
+      <!-- Fila 2 - SRWE -->
+      <article 
+        class="course-card"
+        data-module="2do. Módulo [SRWE]"
+        data-title="CCNAv7 SRWE SabPM Noviembre 2025"
+        data-date="22/Nov/2025 22 de Noviembre de 2025 22Nov25"
+        data-keywords="srwe switches routers switching wireless sabpm sabado noviembre 2025 modulo 2"
+      >
+        <div class="module-badge">2do. Módulo [SRWE]</div>
+        <a href="https://spinetti-ccna.github.io/srwe_sab-pm_22-nov-2025/" title="CCNAv7: SRWE (SabPM)
+Inicio: 22 de Noviembre de 2025" target="_blank" rel="noopener noreferrer" class="thumbnail-container">
+          <img src="imagenes/cursos/srwe/SRWE 22Nov25.png" alt="SRWE SabPM Noviembre 2025" loading="lazy">
+          <div class="play-overlay">
+            <span class="play-btn-circle" aria-hidden="true">▶</span>
+          </div>
+        </a>
+      </article>
+
+      <!-- Fila 2 - ENSA -->
+      <article 
+        class="course-card"
+        data-module="3er. Módulo [ENSA]"
+        data-title="CCNAv7 ENSA DomPM Junio 2025"
+        data-date="29/Jun/2025 29 de Junio de 2025 29Jun25"
+        data-keywords="ensa enterprise redes empresariales seguridad automatizacion dompm domingo junio 2025 modulo 3"
+      >
+        <div class="module-badge">3er. Módulo [ENSA]</div>
+        <a href="https://spinetti-ccna.github.io/ensa_dom-pm_29-jun-2025/" title="CCNAv7: ENSA (DomPM)
+Inicio: 29 de Junio de 2025" target="_blank" rel="noopener noreferrer" class="thumbnail-container">
+          <img src="imagenes/cursos/ensa/ENSA 29Jun25.png" alt="ENSA DomPM Junio 2025" loading="lazy">
+          <div class="play-overlay">
+            <span class="play-btn-circle" aria-hidden="true">▶</span>
+          </div>
+        </a>
+      </article>
+
+      <!-- Fila 3 - ITN -->
+      <article 
+        class="course-card"
+        data-module="1er. Módulo [ITN]"
+        data-title="CCNAv7 ITN SabPM Junio 2025"
+        data-date="28/Jun/2025 28 de Junio de 2025 28Jun25"
+        data-keywords="itn introduccion a redes sabpm sabado junio 2025 modulo 1"
+      >
+        <div class="module-badge">1er. Módulo [ITN]</div>
+        <a href="https://spinetti-ccna.github.io/itn_sab-pm_28-jun-2025/" title="CCNAv7: ITN (SabPM)
+Inicio: 28 de Junio de 2025" target="_blank" rel="noopener noreferrer" class="thumbnail-container">
+          <img src="imagenes/cursos/itn/ITN 28Jun25.png" alt="ITN SabPM Junio 2025" loading="lazy">
+          <div class="play-overlay">
+            <span class="play-btn-circle" aria-hidden="true">▶</span>
+          </div>
+        </a>
+      </article>
+
+      <!-- Fila 3 - SRWE -->
+      <article 
+        class="course-card"
+        data-module="2do. Módulo [SRWE]"
+        data-title="CCNAv7 SRWE SabAM Junio 2025"
+        data-date="28/Jun/2025 28 de Junio de 2025 28Jun25"
+        data-keywords="srwe switches routers switching wireless sabam sabado junio 2025 modulo 2"
+      >
+        <div class="module-badge">2do. Módulo [SRWE]</div>
+        <a href="https://spinetti-ccna.github.io/srwe_sab-am_28-jun-2025/" title="CCNAv7: SRWE (SabAM)
+Inicio: 28 de Junio de 2025" target="_blank" rel="noopener noreferrer" class="thumbnail-container">
+          <img src="imagenes/cursos/srwe/SRWE 28Jun25.png" alt="SRWE SabAM Junio 2025" loading="lazy">
+          <div class="play-overlay">
+            <span class="play-btn-circle" aria-hidden="true">▶</span>
+          </div>
+        </a>
+      </article>
+
+      <!-- Fila 3 - ENSA -->
+      <article 
+        class="course-card"
+        data-module="3er. Módulo [ENSA]"
+        data-title="CCNAv7 ENSA DomAM Marzo 2025"
+        data-date="23/Mar/2025 23 de Marzo de 2025 23Mar25"
+        data-keywords="ensa enterprise redes empresariales seguridad automatizacion domam domingo marzo 2025 modulo 3"
+      >
+        <div class="module-badge">3er. Módulo [ENSA]</div>
+        <a href="https://spinetti-ccna.github.io/ensa_dom-am_23-mar-2025/" title="CCNAv7: ENSA (DomAM)
+Inicio: 23 de Marzo de 2025" target="_blank" rel="noopener noreferrer" class="thumbnail-container">
+          <img src="imagenes/cursos/ensa/ENSA 23Mar25.png" alt="ENSA DomAM Marzo 2025" loading="lazy">
+          <div class="play-overlay">
+            <span class="play-btn-circle" aria-hidden="true">▶</span>
+          </div>
+        </a>
+      </article>
+
+    </main>
+
   </div>
 
-  <script>
-    // Desactiva el menú contextual del clic derecho únicamente para las imágenes
-    document.addEventListener('contextmenu', function(e) {
-      if (e.target.nodeName === 'IMG') {
-        e.preventDefault();
-      }
-    });
+  <!-- BOTÓN FLOTANTE VOLVER ARRIBA -->
+  <button id="scrollTopBtn" class="scroll-top-btn" title="Volver arriba" aria-label="Volver arriba">
+    ↑
+  </button>
 
-    // Desactiva la acción de arrastrar las imágenes hacia el escritorio o carpetas
-    document.addEventListener('dragstart', function(e) {
-      if (e.target.nodeName === 'IMG') {
-        e.preventDefault();
+  <!-- FOOTER -->
+  <footer>
+    <p>Curso CCNAv7 impartido por el Instructor Gustavo Spinetti | Contacto: 
+      <a href="mailto:gustavoaspinettim@yahoo.es">gustavoaspinettim@yahoo.es</a>
+    </p>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('courseSearch');
+      const cards = Array.from(document.querySelectorAll('.course-card'));
+      const noResults = document.getElementById('noResults');
+      const searchCounter = document.getElementById('searchCounter');
+      const themeToggle = document.getElementById('themeToggle');
+      const scrollTopBtn = document.getElementById('scrollTopBtn');
+      const totalCards = cards.length;
+
+      // 1. ACTUALIZACIÓN DEL CONTADOR
+      const updateCounter = (count) => {
+        if (searchInput.value.trim()) {
+          searchCounter.textContent = `Mostrando ${count} de ${totalCards} cursos`;
+        } else {
+          searchCounter.textContent = `Mostrando ${totalCards} de ${totalCards} cursos`;
+        }
+      };
+
+      updateCounter(totalCards);
+
+      // 2. FUNCIÓN DE BÚSQUEDA Y FILTRADO EN TIEMPO REAL
+      const normalizeText = (text) => {
+        return (text || '')
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '');
+      };
+
+      searchInput.addEventListener('input', (e) => {
+        const query = normalizeText(e.target.value.trim());
+        let matchesCount = 0;
+
+        cards.forEach((card) => {
+          const searchableContent = [
+            card.getAttribute('data-module'),
+            card.getAttribute('data-title'),
+            card.getAttribute('data-date'),
+            card.getAttribute('data-keywords')
+          ].join(' ');
+
+          const normalizedContent = normalizeText(searchableContent);
+
+          if (!query || normalizedContent.includes(query)) {
+            card.style.display = 'flex';
+            matchesCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        updateCounter(matchesCount);
+        noResults.style.display = matchesCount === 0 ? 'block' : 'none';
+      });
+
+      // 3. CONTROL DE MODO OSCURO CON LOCALSTORAGE
+      const savedTheme = localStorage.getItem('theme_culminados');
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        themeToggle.textContent = '☀️ Modo Claro';
       }
+
+      themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        themeToggle.textContent = isDark ? '☀️ Modo Claro' : '🌙 Modo Oscuro';
+        localStorage.setItem('theme_culminados', isDark ? 'dark' : 'light');
+      });
+
+      // 4. BOTÓN FLOTANTE "VOLVER ARRIBA"
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          scrollTopBtn.style.display = 'flex';
+        } else {
+          scrollTopBtn.style.display = 'none';
+        }
+      });
+
+      scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // 5. PROTECCIÓN ANTI-COPIA DE IMÁGENES
+      document.addEventListener('contextmenu', (e) => {
+        if (e.target.nodeName === 'IMG') {
+          e.preventDefault();
+        }
+      });
+
+      document.addEventListener('dragstart', (e) => {
+        if (e.target.nodeName === 'IMG') {
+          e.preventDefault();
+        }
+      });
     });
   </script>
+
 </body>
 </html>
