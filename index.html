@@ -13,8 +13,8 @@
       --accent-color: #d92525;       /* Rojo de acento */
       --bg-color: #f4f7f9;           /* Fondo gris claro limpio */
       --card-bg: #ffffff;
-      --text-main: #0b3c5d;          /* Títulos y textos principales en azul */
-      --text-muted: #0b3c5d;         /* Subtítulos en azul */
+      --text-main: #0b3c5d;          /* Títulos y textos en azul institucional */
+      --text-muted: #0b3c5d;         /* Subtítulos */
       --border-color: #e2e8f0;
       --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       --transition: all 0.25s ease-in-out;
@@ -212,51 +212,71 @@
       margin-bottom: 25px;
     }
 
-    /* GRID DE CURSOS */
-    .courses-grid {
+    /* ESTRUCTURA EN 3 COLUMNAS MAESTRAS */
+    .modules-container {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 24px;
+      align-items: start;
     }
 
-    .course-card {
+    .module-column {
       background: var(--card-bg);
-      border-radius: 12px;
-      overflow: hidden;
+      border-radius: 14px;
       box-shadow: var(--shadow);
+      border: 1px solid var(--border-color);
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       transition: var(--transition);
-      border: 1px solid var(--border-color);
-      position: relative;
     }
 
-    .course-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
-    }
-
-    /* CABECERA DE LA TARJETA (MÓDULO) */
-    .module-badge {
+    /* TÍTULO ÚNICO DEL CAMPO DE CADA MÓDULO */
+    .module-header {
       background: var(--primary-color);
       color: #ffffff;
-      font-size: 0.82rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      padding: 8px 12px;
+      padding: 14px 10px;
       text-align: center;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
 
-    body.dark-mode .module-badge {
+    body.dark-mode .module-header {
       background: #1e3a8a;
       color: #e0f2fe;
     }
 
+    /* LISTA DE CURSOS DENTRO DE LA COLUMNA (ORDEN DESCENDENTE) */
+    .courses-list {
+      padding: 18px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* TARJETA DE CURSO INDIVIDUAL */
+    .course-card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+    }
+
+    .course-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+    }
+
+    /* CONTENEDOR CUADRADO 1:1 */
     .thumbnail-container {
       position: relative;
       width: 100%;
-      padding-top: 56.25%; /* 16:9 Aspect Ratio */
+      padding-top: 100%; /* Proporción cuadrada 1:1 perfecta */
       background-color: #0b3c5d;
       overflow: hidden;
       display: block;
@@ -276,7 +296,7 @@
     }
 
     .course-card:hover .thumbnail-container img {
-      transform: scale(1.03);
+      transform: scale(1.04);
     }
 
     .play-overlay {
@@ -373,6 +393,13 @@
     }
 
     /* RESPONSIVE */
+    @media (max-width: 992px) {
+      .modules-container {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+    }
+
     @media (max-width: 768px) {
       .header-card {
         flex-direction: column;
@@ -385,9 +412,6 @@
       .header-logo {
         width: 85px;
         height: 85px;
-      }
-      .courses-grid {
-        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -438,175 +462,190 @@
       Cargando cursos...
     </div>
 
-    <!-- MENSAJE DE ESTADO: SIN RESULTADOS -->
+    <!-- MENSAJE DE ESTADO: SIN RESULTADOS GENERALES -->
     <div id="noResults" class="no-results" role="status" aria-live="polite">
       No se encontraron cursos que coincidan con tu búsqueda.
     </div>
 
-    <!-- LISTADO DE CURSOS CULMINADOS EN GRID -->
-    <main class="courses-grid" id="coursesGrid">
+    <!-- ESTRUCTURA EN 3 COLUMNAS MAESTRAS (ORDEN DESCENDENTE POR MÓDULO) -->
+    <main class="modules-container" id="modulesContainer">
 
-      <!-- Fila 1 - ITN -->
-      <article 
-        class="course-card"
-        data-module="1er. Módulo [ITN]"
-        data-title="CCNAv7 ITN DomPM Marzo 2026"
-        data-date="01/Mar/2026 1ero de Marzo de 2026 01Mar26"
-        data-keywords="itn introduccion a redes dompm domingo marzo 2026 modulo 1"
-      >
-        <div class="module-badge">1er. Módulo [ITN]</div>
-        <a href="https://spinetti-ccna.github.io/itn_dom-pm_1ero-mar-2026/" title="CCNAv7: ITN (DomPM)
+      <!-- COLUMNA 1: 1er. Módulo [ITN] -->
+      <section class="module-column">
+        <div class="module-header">1er. Módulo [ITN]</div>
+        <div class="courses-list">
+
+          <!-- 1. ITN Más reciente: 01/Marzo/2026 -->
+          <article 
+            class="course-card"
+            data-module="1er. Módulo [ITN]"
+            data-title="CCNAv7 ITN DomPM Marzo 2026"
+            data-date="01/Mar/2026 1ero de Marzo de 2026 01Mar26"
+            data-keywords="itn introduccion a redes dompm domingo marzo 2026 modulo 1"
+          >
+            <a href="https://spinetti-ccna.github.io/itn_dom-pm_1ero-mar-2026/" title="CCNAv7: ITN (DomPM)
 Inicio: 1ero. de Marzo de 2026" target="_blank" rel="noopener noreferrer" class="thumbnail-container">
-          <img src="imagenes/cursos/itn/ITN 01Mar26.png" alt="ITN DomPM Marzo 2026" loading="lazy">
-          <div class="play-overlay">
-            <span class="play-btn-circle" aria-hidden="true">▶</span>
-          </div>
-        </a>
-      </article>
+              <img src="imagenes/cursos/itn/ITN 01Mar26.png" alt="ITN DomPM Marzo 2026" loading="lazy">
+              <div class="play-overlay">
+                <span class="play-btn-circle" aria-hidden="true">▶</span>
+              </div>
+            </a>
+          </article>
 
-      <!-- Fila 1 - SRWE -->
-      <article 
-        class="course-card"
-        data-module="2do. Módulo [SRWE]"
-        data-title="CCNAv7 SRWE DomAM Abril 2026"
-        data-date="26/Abr/2026 26 de Abril de 2026 26Abr26"
-        data-keywords="srwe switches routers switching wireless domam domingo abril 2026 modulo 2"
-      >
-        <div class="module-badge">2do. Módulo [SRWE]</div>
-        <a href="https://spinetti-ccna.github.io/srwe_dom-am_26-abr-2026/" title="CCNAv7: SRWE (DomAM)
-Inicio: 26 de Abril de 2026" target="_blank" rel="noopener noreferrer" class="thumbnail-container">
-          <img src="imagenes/cursos/srwe/SRWE 26Abr26.png" alt="SRWE DomAM Abril 2026" loading="lazy">
-          <div class="play-overlay">
-            <span class="play-btn-circle" aria-hidden="true">▶</span>
-          </div>
-        </a>
-      </article>
-
-      <!-- Fila 1 - ENSA -->
-      <article 
-        class="course-card"
-        data-module="3er. Módulo [ENSA]"
-        data-title="CCNAv7 ENSA SabAM Marzo 2026"
-        data-date="21/Mar/2026 21 de Marzo de 2026 21Mar26"
-        data-keywords="ensa enterprise redes empresariales seguridad automatizacion sabam sabado marzo 2026 modulo 3"
-      >
-        <div class="module-badge">3er. Módulo [ENSA]</div>
-        <a href="https://spinetti-ccna.github.io/ensa_sab-am_21-mar-2026/" title="CCNAv7: ENSA (SabAM)
-Inicio: 21 de Marzo de 2026" target="_blank" rel="noopener noreferrer" class="thumbnail-container">
-          <img src="imagenes/cursos/ensa/ENSA 21Mar26.png" alt="ENSA SabAM Marzo 2026" loading="lazy">
-          <div class="play-overlay">
-            <span class="play-btn-circle" aria-hidden="true">▶</span>
-          </div>
-        </a>
-      </article>
-
-      <!-- Fila 2 - ITN -->
-      <article 
-        class="course-card"
-        data-module="1er. Módulo [ITN]"
-        data-title="CCNAv7 ITN DomAM Octubre 2025"
-        data-date="12/Oct/2025 12 de Octubre de 2025 12Oct25"
-        data-keywords="itn introduccion a redes domam domingo octubre 2025 modulo 1"
-      >
-        <div class="module-badge">1er. Módulo [ITN]</div>
-        <a href="https://spinetti-ccna.github.io/itn_dom-am_12-oct-2025/" title="CCNAv7: ITN (DomAM)
+          <!-- 2. ITN Intermedio: 12/Octubre/2025 -->
+          <article 
+            class="course-card"
+            data-module="1er. Módulo [ITN]"
+            data-title="CCNAv7 ITN DomAM Octubre 2025"
+            data-date="12/Oct/2025 12 de Octubre de 2025 12Oct25"
+            data-keywords="itn introduccion a redes domam domingo octubre 2025 modulo 1"
+          >
+            <a href="https://spinetti-ccna.github.io/itn_dom-am_12-oct-2025/" title="CCNAv7: ITN (DomAM)
 Inicio: 12 de Octubre de 2025" target="_blank" rel="noopener noreferrer" class="thumbnail-container">
-          <img src="imagenes/cursos/itn/ITN 12Oct25.png" alt="ITN DomAM Octubre 2025" loading="lazy">
-          <div class="play-overlay">
-            <span class="play-btn-circle" aria-hidden="true">▶</span>
-          </div>
-        </a>
-      </article>
+              <img src="imagenes/cursos/itn/ITN 12Oct25.png" alt="ITN DomAM Octubre 2025" loading="lazy">
+              <div class="play-overlay">
+                <span class="play-btn-circle" aria-hidden="true">▶</span>
+              </div>
+            </a>
+          </article>
 
-      <!-- Fila 2 - SRWE -->
-      <article 
-        class="course-card"
-        data-module="2do. Módulo [SRWE]"
-        data-title="CCNAv7 SRWE SabPM Noviembre 2025"
-        data-date="22/Nov/2025 22 de Noviembre de 2025 22Nov25"
-        data-keywords="srwe switches routers switching wireless sabpm sabado noviembre 2025 modulo 2"
-      >
-        <div class="module-badge">2do. Módulo [SRWE]</div>
-        <a href="https://spinetti-ccna.github.io/srwe_sab-pm_22-nov-2025/" title="CCNAv7: SRWE (SabPM)
+          <!-- 3. ITN Antiguo: 28/Junio/2025 -->
+          <article 
+            class="course-card"
+            data-module="1er. Módulo [ITN]"
+            data-title="CCNAv7 ITN SabPM Junio 2025"
+            data-date="28/Jun/2025 28 de Junio de 2025 28Jun25"
+            data-keywords="itn introduccion a redes sabpm sabado junio 2025 modulo 1"
+          >
+            <a href="https://spinetti-ccna.github.io/itn_sab-pm_28-jun-2025/" title="CCNAv7: ITN (SabPM)
+Inicio: 28 de Junio de 2025" target="_blank" rel="noopener noreferrer" class="thumbnail-container">
+              <img src="imagenes/cursos/itn/ITN 28Jun25.png" alt="ITN SabPM Junio 2025" loading="lazy">
+              <div class="play-overlay">
+                <span class="play-btn-circle" aria-hidden="true">▶</span>
+              </div>
+            </a>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- COLUMNA 2: 2do. Módulo [SRWE] -->
+      <section class="module-column">
+        <div class="module-header">2do. Módulo [SRWE]</div>
+        <div class="courses-list">
+
+          <!-- 1. SRWE Más reciente: 26/Abril/2026 -->
+          <article 
+            class="course-card"
+            data-module="2do. Módulo [SRWE]"
+            data-title="CCNAv7 SRWE DomAM Abril 2026"
+            data-date="26/Abr/2026 26 de Abril de 2026 26Abr26"
+            data-keywords="srwe switches routers switching wireless domam domingo abril 2026 modulo 2"
+          >
+            <a href="https://spinetti-ccna.github.io/srwe_dom-am_26-abr-2026/" title="CCNAv7: SRWE (DomAM)
+Inicio: 26 de Abril de 2026" target="_blank" rel="noopener noreferrer" class="thumbnail-container">
+              <img src="imagenes/cursos/srwe/SRWE 26Abr26.png" alt="SRWE DomAM Abril 2026" loading="lazy">
+              <div class="play-overlay">
+                <span class="play-btn-circle" aria-hidden="true">▶</span>
+              </div>
+            </a>
+          </article>
+
+          <!-- 2. SRWE Intermedio: 22/Noviembre/2025 -->
+          <article 
+            class="course-card"
+            data-module="2do. Módulo [SRWE]"
+            data-title="CCNAv7 SRWE SabPM Noviembre 2025"
+            data-date="22/Nov/2025 22 de Noviembre de 2025 22Nov25"
+            data-keywords="srwe switches routers switching wireless sabpm sabado noviembre 2025 modulo 2"
+          >
+            <a href="https://spinetti-ccna.github.io/srwe_sab-pm_22-nov-2025/" title="CCNAv7: SRWE (SabPM)
 Inicio: 22 de Noviembre de 2025" target="_blank" rel="noopener noreferrer" class="thumbnail-container">
-          <img src="imagenes/cursos/srwe/SRWE 22Nov25.png" alt="SRWE SabPM Noviembre 2025" loading="lazy">
-          <div class="play-overlay">
-            <span class="play-btn-circle" aria-hidden="true">▶</span>
-          </div>
-        </a>
-      </article>
+              <img src="imagenes/cursos/srwe/SRWE 22Nov25.png" alt="SRWE SabPM Noviembre 2025" loading="lazy">
+              <div class="play-overlay">
+                <span class="play-btn-circle" aria-hidden="true">▶</span>
+              </div>
+            </a>
+          </article>
 
-      <!-- Fila 2 - ENSA -->
-      <article 
-        class="course-card"
-        data-module="3er. Módulo [ENSA]"
-        data-title="CCNAv7 ENSA DomPM Junio 2025"
-        data-date="29/Jun/2025 29 de Junio de 2025 29Jun25"
-        data-keywords="ensa enterprise redes empresariales seguridad automatizacion dompm domingo junio 2025 modulo 3"
-      >
-        <div class="module-badge">3er. Módulo [ENSA]</div>
-        <a href="https://spinetti-ccna.github.io/ensa_dom-pm_29-jun-2025/" title="CCNAv7: ENSA (DomPM)
+          <!-- 3. SRWE Antiguo: 28/Junio/2025 -->
+          <article 
+            class="course-card"
+            data-module="2do. Módulo [SRWE]"
+            data-title="CCNAv7 SRWE SabAM Junio 2025"
+            data-date="28/Jun/2025 28 de Junio de 2025 28Jun25"
+            data-keywords="srwe switches routers switching wireless sabam sabado junio 2025 modulo 2"
+          >
+            <a href="https://spinetti-ccna.github.io/srwe_sab-am_28-jun-2025/" title="CCNAv7: SRWE (SabAM)
+Inicio: 28 de Junio de 2025" target="_blank" rel="noopener noreferrer" class="thumbnail-container">
+              <img src="imagenes/cursos/srwe/SRWE 28Jun25.png" alt="SRWE SabAM Junio 2025" loading="lazy">
+              <div class="play-overlay">
+                <span class="play-btn-circle" aria-hidden="true">▶</span>
+              </div>
+            </a>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- COLUMNA 3: 3er. Módulo [ENSA] -->
+      <section class="module-column">
+        <div class="module-header">3er. Módulo [ENSA]</div>
+        <div class="courses-list">
+
+          <!-- 1. ENSA Más reciente: 21/Marzo/2026 -->
+          <article 
+            class="course-card"
+            data-module="3er. Módulo [ENSA]"
+            data-title="CCNAv7 ENSA SabAM Marzo 2026"
+            data-date="21/Mar/2026 21 de Marzo de 2026 21Mar26"
+            data-keywords="ensa enterprise redes empresariales seguridad automatizacion sabam sabado marzo 2026 modulo 3"
+          >
+            <a href="https://spinetti-ccna.github.io/ensa_sab-am_21-mar-2026/" title="CCNAv7: ENSA (SabAM)
+Inicio: 21 de Marzo de 2026" target="_blank" rel="noopener noreferrer" class="thumbnail-container">
+              <img src="imagenes/cursos/ensa/ENSA 21Mar26.png" alt="ENSA SabAM Marzo 2026" loading="lazy">
+              <div class="play-overlay">
+                <span class="play-btn-circle" aria-hidden="true">▶</span>
+              </div>
+            </a>
+          </article>
+
+          <!-- 2. ENSA Intermedio: 29/Junio/2025 -->
+          <article 
+            class="course-card"
+            data-module="3er. Módulo [ENSA]"
+            data-title="CCNAv7 ENSA DomPM Junio 2025"
+            data-date="29/Jun/2025 29 de Junio de 2025 29Jun25"
+            data-keywords="ensa enterprise redes empresariales seguridad automatizacion dompm domingo junio 2025 modulo 3"
+          >
+            <a href="https://spinetti-ccna.github.io/ensa_dom-pm_29-jun-2025/" title="CCNAv7: ENSA (DomPM)
 Inicio: 29 de Junio de 2025" target="_blank" rel="noopener noreferrer" class="thumbnail-container">
-          <img src="imagenes/cursos/ensa/ENSA 29Jun25.png" alt="ENSA DomPM Junio 2025" loading="lazy">
-          <div class="play-overlay">
-            <span class="play-btn-circle" aria-hidden="true">▶</span>
-          </div>
-        </a>
-      </article>
+              <img src="imagenes/cursos/ensa/ENSA 29Jun25.png" alt="ENSA DomPM Junio 2025" loading="lazy">
+              <div class="play-overlay">
+                <span class="play-btn-circle" aria-hidden="true">▶</span>
+              </div>
+            </a>
+          </article>
 
-      <!-- Fila 3 - ITN -->
-      <article 
-        class="course-card"
-        data-module="1er. Módulo [ITN]"
-        data-title="CCNAv7 ITN SabPM Junio 2025"
-        data-date="28/Jun/2025 28 de Junio de 2025 28Jun25"
-        data-keywords="itn introduccion a redes sabpm sabado junio 2025 modulo 1"
-      >
-        <div class="module-badge">1er. Módulo [ITN]</div>
-        <a href="https://spinetti-ccna.github.io/itn_sab-pm_28-jun-2025/" title="CCNAv7: ITN (SabPM)
-Inicio: 28 de Junio de 2025" target="_blank" rel="noopener noreferrer" class="thumbnail-container">
-          <img src="imagenes/cursos/itn/ITN 28Jun25.png" alt="ITN SabPM Junio 2025" loading="lazy">
-          <div class="play-overlay">
-            <span class="play-btn-circle" aria-hidden="true">▶</span>
-          </div>
-        </a>
-      </article>
-
-      <!-- Fila 3 - SRWE -->
-      <article 
-        class="course-card"
-        data-module="2do. Módulo [SRWE]"
-        data-title="CCNAv7 SRWE SabAM Junio 2025"
-        data-date="28/Jun/2025 28 de Junio de 2025 28Jun25"
-        data-keywords="srwe switches routers switching wireless sabam sabado junio 2025 modulo 2"
-      >
-        <div class="module-badge">2do. Módulo [SRWE]</div>
-        <a href="https://spinetti-ccna.github.io/srwe_sab-am_28-jun-2025/" title="CCNAv7: SRWE (SabAM)
-Inicio: 28 de Junio de 2025" target="_blank" rel="noopener noreferrer" class="thumbnail-container">
-          <img src="imagenes/cursos/srwe/SRWE 28Jun25.png" alt="SRWE SabAM Junio 2025" loading="lazy">
-          <div class="play-overlay">
-            <span class="play-btn-circle" aria-hidden="true">▶</span>
-          </div>
-        </a>
-      </article>
-
-      <!-- Fila 3 - ENSA -->
-      <article 
-        class="course-card"
-        data-module="3er. Módulo [ENSA]"
-        data-title="CCNAv7 ENSA DomAM Marzo 2025"
-        data-date="23/Mar/2025 23 de Marzo de 2025 23Mar25"
-        data-keywords="ensa enterprise redes empresariales seguridad automatizacion domam domingo marzo 2025 modulo 3"
-      >
-        <div class="module-badge">3er. Módulo [ENSA]</div>
-        <a href="https://spinetti-ccna.github.io/ensa_dom-am_23-mar-2025/" title="CCNAv7: ENSA (DomAM)
+          <!-- 3. ENSA Antiguo: 23/Marzo/2025 -->
+          <article 
+            class="course-card"
+            data-module="3er. Módulo [ENSA]"
+            data-title="CCNAv7 ENSA DomAM Marzo 2025"
+            data-date="23/Mar/2025 23 de Marzo de 2025 23Mar25"
+            data-keywords="ensa enterprise redes empresariales seguridad automatizacion domam domingo marzo 2025 modulo 3"
+          >
+            <a href="https://spinetti-ccna.github.io/ensa_dom-am_23-mar-2025/" title="CCNAv7: ENSA (DomAM)
 Inicio: 23 de Marzo de 2025" target="_blank" rel="noopener noreferrer" class="thumbnail-container">
-          <img src="imagenes/cursos/ensa/ENSA 23Mar25.png" alt="ENSA DomAM Marzo 2025" loading="lazy">
-          <div class="play-overlay">
-            <span class="play-btn-circle" aria-hidden="true">▶</span>
-          </div>
-        </a>
-      </article>
+              <img src="imagenes/cursos/ensa/ENSA 23Mar25.png" alt="ENSA DomAM Marzo 2025" loading="lazy">
+              <div class="play-overlay">
+                <span class="play-btn-circle" aria-hidden="true">▶</span>
+              </div>
+            </a>
+          </article>
+
+        </div>
+      </section>
 
     </main>
 
@@ -629,6 +668,7 @@ Inicio: 23 de Marzo de 2025" target="_blank" rel="noopener noreferrer" class="th
     document.addEventListener('DOMContentLoaded', () => {
       const searchInput = document.getElementById('courseSearch');
       const cards = Array.from(document.querySelectorAll('.course-card'));
+      const columns = Array.from(document.querySelectorAll('.module-column'));
       const noResults = document.getElementById('noResults');
       const searchCounter = document.getElementById('searchCounter');
       const themeToggle = document.getElementById('themeToggle');
@@ -658,6 +698,7 @@ Inicio: 23 de Marzo de 2025" target="_blank" rel="noopener noreferrer" class="th
         const query = normalizeText(e.target.value.trim());
         let matchesCount = 0;
 
+        // Filtrar cada tarjeta individual
         cards.forEach((card) => {
           const searchableContent = [
             card.getAttribute('data-module'),
@@ -669,11 +710,18 @@ Inicio: 23 de Marzo de 2025" target="_blank" rel="noopener noreferrer" class="th
           const normalizedContent = normalizeText(searchableContent);
 
           if (!query || normalizedContent.includes(query)) {
-            card.style.display = 'flex';
+            card.style.display = 'block';
             matchesCount++;
           } else {
             card.style.display = 'none';
           }
+        });
+
+        // Ocultar columnas completas si no tienen resultados visibles
+        columns.forEach((col) => {
+          const visibleCards = col.querySelectorAll('.course-card[style*="display: block"], .course-card:not([style*="display: none"])');
+          const hasVisible = Array.from(col.querySelectorAll('.course-card')).some(c => c.style.display !== 'none');
+          col.style.display = (hasVisible || !query) ? 'flex' : 'none';
         });
 
         updateCounter(matchesCount);
